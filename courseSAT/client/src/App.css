@@ -1,5 +1,9 @@
 .App {
   text-align: center;
+  background-image: url("./img/meetings-bg.jpg");
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: center;
 }
 
 .App-logo {
@@ -35,4 +39,9 @@
   to {
     transform: rotate(360deg);
   }
+}
+.form{
+
+  display: flex;
+  justify-content: center;
 }
