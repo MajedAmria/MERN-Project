@@ -8,6 +8,7 @@ const Main = () => {
   return (
     <div>
         <MainNav/>
+        <h1 style={{color:"white"}}> Our Courses</h1>
         <ListCourse/>
     </div>
   )

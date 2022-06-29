@@ -1,6 +1,6 @@
 import React from 'react'
 import { Navbar,NavbarToggler,NavbarBrand,NavbarText,DropdownItem,DropdownMenu,DropdownToggle,Collapse,Nav,NavItem,NavLink,UncontrolledDropdown} from 'reactstrap'
-const MainNav = () => {
+const DashNav = () => {
   return (
     <div>
         <Navbar color="dark" dark expand="md" light>
@@ -12,16 +12,16 @@ const MainNav = () => {
                   <NavLink href="/about">About Us</NavLink>
                 </NavItem>
                 <NavItem>
-                  <NavLink href="/login">Login</NavLink>
+                  <NavLink href="/new">New Course</NavLink>
                 </NavItem>
                 <NavItem>
-                  <NavLink href="/login">Register</NavLink>
+                  <NavLink href="/logout">Logout</NavLink>
                 </NavItem>
               </Nav>
             </Collapse>
         </Navbar>
-      </div>
+    </div>
   )
 }
 
-export default MainNav
+export default DashNav
