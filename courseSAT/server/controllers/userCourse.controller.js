@@ -21,32 +21,24 @@ module.exports.register=(req, response) => {
     }
 
 module.exports.login=async(request, response)=>{
-    // check if we have the email in our database
     const user = await User.findOne({ email: request.body.email });
     console.log(request.body.password)
-    // check if the password matches with the one in db.
     if(user === null) {
-        // email not found in users collection
         return response.sendStatus(400);
     }
     const correctPassword = await bcrypt.compare(request.body.password, user.password);
 
     if(!correctPassword) {
-        // password wasn't a match!
         return response.sendStatus(400);
     }
-    // define payload
     const payload = {
         id: user._id
         };
-    // generate token
-
     // const secret = process.env.SECRET_KEY;
     const userToken = jwt.sign({
         id: user._id
     }, process.env.SECRET_KEY);
     // add token to cookies 
-           //res.cooki('token', userToken)
     response.cookie("usertoken", userToken, {
             httpOnly: true})
         .json({ msg: "success!", userId:user._id });
@@ -59,7 +51,7 @@ module.exports.createCourse=(request, response)=>{
     Course.create({
         title, startingDate, endDate, description, coursePrice,
         listOfStudents, instructor})
-    .then(course=>response.json(course))
+    .then(course=>response.json(course), console.log(request.cookie.usertoken))
     .catch(err=>response.status(400).json(err));
 }
 
@@ -81,8 +73,6 @@ module.exports.getCourse=(request, response)=>{
     .catch(err=>response.json(err))
 }
 
-//the problem here is when we want to save the updated user
-//itthrows an error with UserSchema pre Validate "Password must match confirm password"
 module.exports.addStudentToCourse=async(request, response)=>{
     const thisCourse=await Course.findOne({_id: request.params.courseId});
     const thisUser=await User.findOne({_id: request.params.userId});
@@ -90,7 +80,7 @@ module.exports.addStudentToCourse=async(request, response)=>{
     thisCourse.listOfStudents=[...thisCourse.listOfStudents,thisUser._id];
     thisUser.listOfCoursesTaken=[...thisUser.listOfCoursesTaken,thisCourse._id];
     thisUser.numberOfCourses+=1;
-    thisUser.save();
+    thisUser.save({ validateBeforeSave: false });
     response.json(thisUser);
 }
 

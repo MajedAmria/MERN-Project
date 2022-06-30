@@ -19,7 +19,6 @@ UserSchema.virtual('confirmPassword')
     .get( () => this._confirmPassword )
     .set( value => this._confirmPassword = value );
 
-//if this method is commented out, addStudentToCourse works without any issue
 UserSchema.pre('validate', function(next) {
     if (this.password !== this.confirmPassword) {
         this.invalidate('confirmPassword', 'Password must match confirm password');
