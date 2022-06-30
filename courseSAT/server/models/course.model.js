@@ -8,7 +8,7 @@ const CourseSchema=new mongoose.Schema({
     min:[Date.now, "please enter a valid end date"]},
     description:{type:String},
     coursePrice:{type:Number},
-    listOfStudents:{type:[String]},
+    listOfStudents:[{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
     instructor:{type:String},
     imageUrl:{type:String},
 })

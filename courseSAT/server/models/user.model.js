@@ -12,21 +12,20 @@ const UserSchema= new mongoose.Schema({
     password:{type:String, required:[true, "Please Enter a Password"], minLength:[3, "Password should have at least 12 characters"]},
     phoneNumber:{type:Number, required:[true, "Please enter your phone number"], min:[3, "Phone Number should be at least 10 digits"]},
     numberOfCourses:{type:Number, default: 0},
-    listOfCoursesTaken:{type:[String]}
+    listOfCoursesTaken:[{ type: mongoose.Schema.Types.ObjectId, ref: 'Course' }]
 }, { timestamps: true });
 
 UserSchema.virtual('confirmPassword')
     .get( () => this._confirmPassword )
     .set( value => this._confirmPassword = value );
 
-UserSchema.pre('validate', function(next) {
-    if (this.password !== this.confirmPassword) {
-        this.invalidate('confirmPassword', 'Password must match confirm password');
-        console.log("password", password);
-        console.log("confirmPassword", confirmPassword);
-        }
-        next();
-    });
+//if this method is commented out, addStudentToCourse works without any issue
+// UserSchema.pre('validate', function(next) {
+//     if (this.password !== this.confirmPassword) {
+//         this.invalidate('confirmPassword', 'Password must match confirm password');
+//         }
+//         next();
+//     });
 
 UserSchema.pre('save', function(next) {
     bcrypt.hash(this.password, 10)
