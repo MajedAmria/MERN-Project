@@ -9,6 +9,16 @@ const About = () => {
     <div>
     <MainNav/>
     <AboutUs/>
+    <br/><br/>
+    <br/><br/>
+    <br/><br/>
+    <br/><br/>
+    <br/><br/>
+    <br/><br/>
+    <br/><br/>
+    <br/><br/>
+    <br/><br/>
+    <br/><br/>
     </div>
   )
 }
