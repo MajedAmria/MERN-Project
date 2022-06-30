@@ -11,6 +11,6 @@ const CourseSchema=new mongoose.Schema({
     listOfStudents:[{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
     instructor:{type:String},
     imageUrl:{type:String},},
-    { timestamps: true });
+    { timestamps: true});
 
 module.exports.Course=mongoose.model('Course', CourseSchema);
