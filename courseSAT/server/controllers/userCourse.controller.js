@@ -86,10 +86,15 @@ module.exports.getCourse=(request, response)=>{
 module.exports.addStudentToCourse=async(request, response)=>{
     const thisCourse=await Course.findOne({_id: request.params.courseId});
     const thisUser=await User.findOne({_id: request.params.userId});
-    thisCourse.listOfStudents=[...thisCourse.listOfStudents,thisUser._id];
     thisCourse.save();
+    thisCourse.listOfStudents=[...thisCourse.listOfStudents,thisUser._id];
     thisUser.listOfCoursesTaken=[...thisUser.listOfCoursesTaken,thisCourse._id];
     thisUser.numberOfCourses+=1;
     thisUser.save();
     response.json(thisUser);
+}
+
+module.exports.logout= (req, res) => {
+    res.clearCookie('usertoken');
+    res.sendStatus(200);
 }

@@ -20,12 +20,12 @@ UserSchema.virtual('confirmPassword')
     .set( value => this._confirmPassword = value );
 
 //if this method is commented out, addStudentToCourse works without any issue
-// UserSchema.pre('validate', function(next) {
-//     if (this.password !== this.confirmPassword) {
-//         this.invalidate('confirmPassword', 'Password must match confirm password');
-//         }
-//         next();
-//     });
+UserSchema.pre('validate', function(next) {
+    if (this.password !== this.confirmPassword) {
+        this.invalidate('confirmPassword', 'Password must match confirm password');
+        }
+        next();
+    });
 
 UserSchema.pre('save', function(next) {
     bcrypt.hash(this.password, 10)
@@ -34,5 +34,6 @@ UserSchema.pre('save', function(next) {
         next();
         });
     });
+
 
 module.exports.User=mongoose.model('User', UserSchema);
