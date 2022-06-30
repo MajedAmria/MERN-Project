@@ -13,8 +13,15 @@ const ListCourse = () => {
   const history =useHistory();
   const cards = [1, 2, 3, 4, 5, 6];
   return (
-    <div>
-       <Container sx={{ py: 8 }} maxWidth="md" >
+    <div >
+      
+      <div className='all'>
+      <h5 className='para'>HELLO STUDENTS</h5> 
+      <h2 className='para'>Welcome To COURSE@ </h2>
+      <br/><br/><br/><br/>
+      <h1 style={{color:"white"}}> Our Courses</h1>
+      <hr style={{color:"white"}}/>
+      <Container sx={{ py: 8 }} maxWidth="md" >
           {/* End hero unit */}
           <Grid container spacing={4}>
             {cards.map((card) => (
@@ -45,6 +52,10 @@ const ListCourse = () => {
             ))}
           </Grid>
         </Container>
+      </div>
+      
+     
+       
     </div>
   )
 }

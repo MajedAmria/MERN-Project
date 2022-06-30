@@ -1,5 +1,7 @@
 import React from 'react'
-import { Navbar,NavbarToggler,NavbarBrand,NavbarText,DropdownItem,DropdownMenu,DropdownToggle,Collapse,Nav,NavItem,NavLink,UncontrolledDropdown} from 'reactstrap'
+import  Avatar  from '@mui/material/Avatar'
+import { Navbar,NavbarToggler,NavbarBrand,DropdownItem,DropdownMenu,DropdownToggle,Collapse,Nav,NavItem,NavLink,UncontrolledDropdown} from 'reactstrap'
+import { deepOrange } from '@mui/material/colors'
 const DashNav = () => {
   return (
     <div>
@@ -18,6 +20,8 @@ const DashNav = () => {
                   <NavLink href="/logout">Logout</NavLink>
                 </NavItem>
               </Nav>
+              <h3 style={{color:"white"}}> Name of Loged in User</h3>
+              <Avatar sx={{ bgcolor: deepOrange[500] }} >U</Avatar>
             </Collapse>
         </Navbar>
     </div>
