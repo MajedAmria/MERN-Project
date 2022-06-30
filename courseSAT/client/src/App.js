@@ -3,7 +3,6 @@ import {
   BrowserRouter,
   Switch,
   Route,
-  Redirect
 } from "react-router-dom";
 import Main from './views/Main';
 import LoginForm from './views/LoginForm';
