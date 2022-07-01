@@ -11,8 +11,8 @@ const Registration = () => {
               <Input id="Fisrt" name="email" type="text"/>
               <Label for="Last">Last Name</Label>
               <Input id="Last" name="email" type="text"/>
-              <Label for="Last">Phone Number</Label>
-              <Input id="Last" name="email" type="number"/>
+              <Label for="phone">Phone Number</Label>
+              <Input id="phone" name="email" type="number"/>
               <Label for="exampleEmail">Email</Label>
               <Input id="exampleEmail" name="email" type="email"/>
               <Label for="examplePassword">Password</Label>
