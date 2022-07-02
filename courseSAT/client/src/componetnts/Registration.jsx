@@ -10,15 +10,27 @@ const Registration = (props) => {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfPassword] = useState('');
   const [phoneNumber, setPhoneNumber] = useState(0);
+  const [errors,setErrors] = useState([])
   const history=useHistory();
 
   const onRegistration=async(e)=>{
     e.preventDefault();
     // await axios.post('http://localhost:8000/api/register', {firstName: firstName, lastName: lastName,
     // email: email, password: password, confirmPassword: confirmPassword, phoneNumber: phoneNumber})
+    try{
     props.updateLoggedInUser(await axios.post('http://localhost:8000/api/register', {firstName: firstName, lastName: lastName,
     email: email, password: password, confirmPassword: confirmPassword, phoneNumber: phoneNumber}))
     history.push("/success");
+  }
+  catch(err){
+    const errorResponse = err.response.data.errors; // Get the errors from err.response.data
+    const errorArr = []; // Define a temp error array to push the messages in
+    for (const key of Object.keys(errorResponse)) { // Loop through all errors and get the messages
+        errorArr.push(errorResponse[key].message)
+    }
+    // Set Errors
+    setErrors(errorArr);
+}
   }
 
   return (
@@ -27,6 +39,7 @@ const Registration = (props) => {
           <h1>Register</h1>
           <CardBody>
             <Form onSubmit={onRegistration}>
+            {errors.map((err, index) => <p key={index}>{err}</p>)}
               <Label  for="Fisrt">First Name </Label>
               <Input id="Fisrt" name="email" type="text" onChange={(e)=>setFirstName(e.target.value)} value={firstName}/>
               <Label for="Last">Last Name</Label>

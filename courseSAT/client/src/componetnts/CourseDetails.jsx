@@ -23,6 +23,12 @@ const CourseDetails = (props) => {
     .catch(err=>console.error(err))
   },[id]);
 
+  const userToCourse =(e)=>{
+    axios.put(`http://localhost:8000/api/${id}/${props.loggedInUser._id}`,thisCourse)
+    .then(res=>setThisCourse(res.data))
+    .then(history.push("/success"))
+  }
+
   return (
     <div style={{marginLeft:'30%' ,justifyContent:'center'}}>
       <Container sx={{ py: 8 }} maxWidth="xlg">
@@ -50,7 +56,7 @@ const CourseDetails = (props) => {
                     </Typography>
                   </CardContent>
                   <CardActions>
-                    <Button size="small">Edit</Button>
+                    <Button size="small" onClick={userToCourse}>Register this course</Button>
                     <Button size="small" onClick={()=>history.push("/success")}>Back</Button>
                   </CardActions>
                 </Card>

@@ -11,16 +11,28 @@ const CourseForm = (props) => {
   const [description, setDescription]=useState('');
   const [coursePrice, setCoursePrice]=useState('');
   const [imageUrl, setImageUrl]=useState('');
-
+  const [errors,setErrors]= useState([]);
   const history=useHistory();
 
-  const onCreateCourse=e=>{
+  const onCreateCourse=async(e)=>{
     e.preventDefault ();
-    axios.post('http://localhost:8000/api/course', {title: title, startingDate: startingDate,
+    try{
+    await axios.post('http://localhost:8000/api/course', {title: title, startingDate: startingDate,
     endDate: endDate, description: description, coursePrice: coursePrice,instructor:props.loggedInUser, imageUrl: imageUrl})
-    .then(history.replace("/success"))
-    .catch(err=>console.error(err));
+    history.replace("/success");
   }
+    catch(err){
+      const errorResponse = err.response.data.errors; // Get the errors from err.response.data
+      const errorArr = []; // Define a temp error array to push the messages in
+      for (const key of Object.keys(errorResponse)) { // Loop through all errors and get the messages
+          errorArr.push(errorResponse[key].message)
+      }
+      // Set Errors
+      setErrors(errorArr);
+  }
+  }
+
+
 
   return (
     <div >
@@ -28,6 +40,7 @@ const CourseForm = (props) => {
         <h1>Create Course</h1>
         <CardBody>
           <Form onSubmit={onCreateCourse}>
+          {errors.map((err, index) => <p key={index}>{err}</p>)}
             <Label for="title">Title</Label>
             <Input id="title" name="title" type="text" onChange={(e)=>setTitle(e.target.value)} value={title}/>
             <Label for="startdate">Starting Date</Label>

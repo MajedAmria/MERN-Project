@@ -8,6 +8,7 @@ module.exports=(app)=>{
     app.get('/api/courses', UserCourseController.getAllCourses);
     app.get('/api/users/:id', UserCourseController.getUser);
     app.get('/api/courses/:id', UserCourseController.getCourse);
-    app.put('/api/:courseId/:userId', authenticate,UserCourseController.addStudentToCourse);
+    // app.put('/api/:courseId/:userId', authenticate,UserCourseController.addStudentToCourse);
+    app.put('/api/:courseId/:userId', UserCourseController.addStudentToCourse);
     app.get('/api/logout/', UserCourseController.logout);
 }

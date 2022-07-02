@@ -30,11 +30,7 @@ const DashNav = (props) => {
                   <Link to="/new">New Course</Link>
                 </NavItem>
                 <NavItem>
-<<<<<<< HEAD
-                  <NavLink href="/">Logout</NavLink>
-=======
                   <NavLink onClick={onLogOut}>Logout</NavLink>
->>>>>>> 34cb505e6d5fefa337b083ab9f898faed3c06660
                 </NavItem>
               </Nav>
               <h3 style={{color:"white"}}>{props.loggedInUser.firstName}</h3>

@@ -22,7 +22,7 @@ module.exports.login=async(request, response)=>{
     const user = await User.findOne({ email: request.body.email });
     if(user === null) {
         console.log("user not found");
-        return response.sendStatus(400);
+        return(err=> response.sendStatus(400).json(err));
     }
     const correctPassword = await bcrypt.compare(request.body.password, user.password);
 
@@ -80,7 +80,7 @@ module.exports.addStudentToCourse=async(request, response)=>{
     thisUser.listOfCoursesTaken=[...thisUser.listOfCoursesTaken,thisCourse._id];
     thisUser.numberOfCourses+=1;
     thisUser.save({ validateBeforeSave: false });
-    response.json({thisUser, thisCourse});
+    response.json({thisCourse});
 }
 
 module.exports.logout= (req, res) => {

@@ -8,7 +8,7 @@ const View = (props) => {
   return (
     <div >
       <DashNav updateLoggedInUser={props.updateLoggedInUser} loggedInUser={props.loggedInUser}/>
-      <CourseDetails/>
+      <CourseDetails loggedInUser={props.loggedInUser}/>
     </div>
   )
 }
