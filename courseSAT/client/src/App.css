@@ -1,9 +1,10 @@
 .App {
   text-align: center;
   background-image: url("./img/meetings-bg.jpg");
-  background-size: cover;
+  background-size: contain;
   background-attachment: fixed;
   background-position: center;
+  height: 100%;
 }
 
 .App-logo {
@@ -27,7 +28,11 @@
   font-size: calc(10px + 2vmin);
   color: white;
 }
-
+.about{
+  background-image: url("./img/heading-bg.jpg");
+  background-size: contain;
+  background-attachment: fixed;
+}
 .App-link {
   color: #61dafb;
 }
@@ -44,4 +49,48 @@
 
   display: flex;
   justify-content: center;
+}
+.center{
+  justify-content: center;
+  align-items: center;
+}
+.all{
+
+  background-image: url("./img/apply-bg.jpg");
+  width: 80%;
+  height: 100%;
+  margin: 5%;
+  background-size: cover;
+}
+
+.left{
+  width: 50%;
+  margin-left: 20%;
+  background-image: url("./img/course-01.jpg");
+  
+  background-attachment: fixed;
+}
+.link{
+  text-decoration: none;
+  color: #a22f32;
+  font-weight: bold;
+  font-size: x-large;
+  margin-left: 3%;
+  
+}
+.spa{
+  color: rgb(14, 8, 8);
+  font-weight: bold;
+  font-size: xx-large;
+}
+.nav{
+  margin-left: 75%;
+}
+.para{
+  text-align: center;
+  color: rgb(243, 240, 240);
+}
+#head{
+  padding: 10%;
+
 }
