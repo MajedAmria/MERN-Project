@@ -17,7 +17,7 @@ const DashNav = () => {
                   <NavLink href="/new">New Course</NavLink>
                 </NavItem>
                 <NavItem>
-                  <NavLink href="/logout">Logout</NavLink>
+                  <NavLink href="/">Logout</NavLink>
                 </NavItem>
               </Nav>
               <h3 style={{color:"white"}}> Name of Loged in User</h3>
