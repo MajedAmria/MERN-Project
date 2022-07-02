@@ -4,11 +4,11 @@ import ListCourse from '../componetnts/ListCourse'
 import MainNav from '../componetnts/MainNav'
 
 
-const Main = () => {
+const Main = (props) => {
   return (
     <div>
         <MainNav/>
-        <ListCourse/>
+        <ListCourse loggedInUser={props.loggedInUser}/>
     </div>
   )
 }
