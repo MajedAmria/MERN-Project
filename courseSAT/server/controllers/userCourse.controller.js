@@ -24,11 +24,13 @@ module.exports.login=async(request, response)=>{
     const user = await User.findOne({ email: request.body.email });
     console.log(request.body.password)
     if(user === null) {
+        console.log("user not found");
         return response.sendStatus(400);
     }
     const correctPassword = await bcrypt.compare(request.body.password, user.password);
 
     if(!correctPassword) {
+        console.log("incorrect password");
         return response.sendStatus(400);
     }
     const payload = {
@@ -51,7 +53,7 @@ module.exports.createCourse=(request, response)=>{
     Course.create({
         title, startingDate, endDate, description, coursePrice,
         listOfStudents, instructor})
-    .then(course=>response.json(course), console.log(request.cookie.usertoken))
+    .then(course=>response.json(course))
     .catch(err=>response.status(400).json(err));
 }
 
@@ -76,12 +78,12 @@ module.exports.getCourse=(request, response)=>{
 module.exports.addStudentToCourse=async(request, response)=>{
     const thisCourse=await Course.findOne({_id: request.params.courseId});
     const thisUser=await User.findOne({_id: request.params.userId});
-    thisCourse.save();
     thisCourse.listOfStudents=[...thisCourse.listOfStudents,thisUser._id];
+    thisCourse.save();
     thisUser.listOfCoursesTaken=[...thisUser.listOfCoursesTaken,thisCourse._id];
     thisUser.numberOfCourses+=1;
     thisUser.save({ validateBeforeSave: false });
-    response.json(thisUser);
+    response.json({thisUser, thisCourse});
 }
 
 module.exports.logout= (req, res) => {
