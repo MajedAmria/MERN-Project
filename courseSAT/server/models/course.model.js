@@ -9,7 +9,7 @@ const CourseSchema=new mongoose.Schema({
     description:{type:String},
     coursePrice:{type:Number},
     listOfStudents:[{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
-    instructor:{type:String},
+    instructor:{type: mongoose.Schema.Types.ObjectId, ref: 'User' },
     imageUrl:{type:String},},
     { timestamps: true});
 

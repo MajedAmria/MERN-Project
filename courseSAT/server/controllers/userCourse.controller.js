@@ -11,18 +11,15 @@ module.exports.register=(req, response) => {
             const userToken = jwt.sign({
                 id: user._id
             }, process.env.SECRET_KEY);
-            response
-                .cookie("usertoken", userToken, {
-                    httpOnly: true
-                })
-                .json({ msg: "success!", user: user });
+            response.cookie("usertoken", userToken, {
+                    httpOnly: true})
+                .json({ msg: "success!", user: {_id:user._id, firstName: user.firstName, lastName: user.lastName}});
         })
         .catch(err => response.json(err));
     }
 
 module.exports.login=async(request, response)=>{
     const user = await User.findOne({ email: request.body.email });
-    console.log(request.body.password)
     if(user === null) {
         console.log("user not found");
         return response.sendStatus(400);
@@ -43,16 +40,16 @@ module.exports.login=async(request, response)=>{
     // add token to cookies 
     response.cookie("usertoken", userToken, {
             httpOnly: true})
-        .json({ msg: "success!", userId:user._id });
+        .json({ msg: "success!", user: {_id:user._id, firstName: user.firstName}});
 }
 
 
 module.exports.createCourse=(request, response)=>{
     const {title, startingDate, endDate, description, coursePrice,
-        listOfStudents, instructor}=request.body;
+        listOfStudents, instructor, imageUrl}=request.body;
     Course.create({
         title, startingDate, endDate, description, coursePrice,
-        listOfStudents, instructor})
+        listOfStudents, instructor, imageUrl})
     .then(course=>response.json(course))
     .catch(err=>response.status(400).json(err));
 }

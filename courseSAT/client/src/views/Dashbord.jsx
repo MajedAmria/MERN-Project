@@ -1,15 +1,15 @@
-import React from 'react'
-import DashNav from '../componetnts/DashNav'
-import ListCourse from '../componetnts/ListCourse'
+import React from 'react';
+import DashNav from '../componetnts/DashNav';
+import ListCourse from '../componetnts/ListCourse';
+
+const Dashbord = (props) => {
 
 
 
-const Dashbord = () => {
   return (
     <div>
-    <DashNav/>
-    <h1 style={{color:"white"}}>Welcome User Name</h1>
-    <ListCourse/>
+      <DashNav updateLoggedInUser={props.updateLoggedInUser} loggedInUser={props.loggedInUser}/>
+      <ListCourse loggedInUser={props.loggedInUser}/>
     <br/>
     </div>
   )

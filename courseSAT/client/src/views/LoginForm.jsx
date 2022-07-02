@@ -3,14 +3,13 @@ import HeaderForm from '../componetnts/HeaderForm'
 import Login from '../componetnts/Login'
 import Registration from '../componetnts/Registration'
 
-const LoginForm = () => {
+const LoginForm = (props) => {
   return (
     <div>
-         <HeaderForm/>
+      <HeaderForm/>
     <div className='form'>
-       
-        <Login/>
-        <Registration/>
+        <Login updateLoggedInUser={props.updateLoggedInUser}/>
+        <Registration updateLoggedInUser={props.updateLoggedInUser}/>
     </div>
     </div>
   )
