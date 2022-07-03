@@ -23,7 +23,6 @@ function App() {
 
 
     useEffect(()=>{
-      console.log(loggedInUser)
       if(Object.keys(loggedInUser).length == 0){
         setIsLoggedIn(false)
       }else{

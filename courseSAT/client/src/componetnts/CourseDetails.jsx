@@ -18,14 +18,16 @@ const CourseDetails = (props) => {
   const [listOfStudents2,setListOfStudents] =useState([])
   const {id}=useParams();
   const history =useHistory();
-const joinRoom = () => {
-  if (props.loggedInUser.firstName !== "" && thisCourse.title!=="" ) {
-    socket.emit("join_room", thisCourse.title);
-  }
-};
+  
+  const joinRoom = () => {
+    if (props.loggedInUser.firstName !== "" && thisCourse.title!=="" ) {
+      socket.emit("join_room", thisCourse.title);
+      
+    }
+  };
   useEffect(()=>{
     axios.get(`/api/courses/${id}`)
-    .then(response=>setThisCourse(response.data))
+    .then(response=>{setThisCourse(response.data);console.log(response.data)})
     .then(joinRoom)
     .catch(err=>console.error(err))
   },[id]);
@@ -35,7 +37,7 @@ const joinRoom = () => {
     .then(res=>setThisCourse(res.data))
     .then(history.push("/success"))
   }
-   
+  
   useEffect(()=>{
     axios.get(`/api/listcourses/${id}`)
     .then(res=>{setListOfStudents(res.data[0].listOfStudents)})

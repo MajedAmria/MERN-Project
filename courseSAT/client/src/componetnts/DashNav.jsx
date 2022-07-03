@@ -27,14 +27,14 @@ const DashNav = (props) => {
                   <NavLink href="/about">About Us</NavLink>
                 </NavItem>
                 <NavItem>
-                  <Link to="/new">New Course</Link>
+                  <NavLink onClick={()=>history.push('/new')}>New Course</NavLink>
                 </NavItem>
                 <NavItem>
                   <NavLink onClick={onLogOut}>Logout</NavLink>
                 </NavItem>
               </Nav>
-              <h3 style={{color:"white"}}>{props.loggedInUser.firstName}</h3>
-              <Avatar sx={{ bgcolor: deepOrange[500] }} >{props.loggedInUser.firstName[0]}</Avatar>
+              <h3 style={{color:"white" ,marginRight:10}}>{props.loggedInUser.firstName}</h3>
+              <Avatar sx={{ bgcolor: deepOrange[500] }} >  {props.loggedInUser.firstName[0]}</Avatar>
             </Collapse>
         </Navbar>
     </div>

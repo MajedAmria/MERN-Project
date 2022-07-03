@@ -5,6 +5,7 @@
   background-attachment: fixed;
   background-position: center;
   height: 100%;
+  padding: 1%;
 }
 
 .App-logo {
@@ -60,10 +61,14 @@
   background-image: url("./img/apply-bg.jpg");
   width: 80%;
   height: 100%;
-  margin: 5%;
+  margin: 10%;
   background-size: cover;
-}
+  padding: 1%;
 
+}
+.course{
+  margin-left: 30%;
+}
 .left{
   width: 50%;
   margin-left: 20%;

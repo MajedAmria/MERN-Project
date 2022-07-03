@@ -36,11 +36,13 @@ const CourseForm = (props) => {
 
 
   return (
-    <div >
+    <div className='course'>
       <Card className='center' style={{backgroundColor:'#333',padding:50,margin:100,width:500}} inverse>
-        <h1>Create Course</h1>
+        
         <CardBody>
+        
           <Form onSubmit={onCreateCourse}>
+          <h1 style={{color:'white'}}>Create Course</h1>
           {errors.map((err, index) => <p key={index}>{err}</p>)}
             <Label for="title">Title</Label>
             <Input id="title" name="title" type="text" onChange={(e)=>setTitle(e.target.value)} value={title}/>
