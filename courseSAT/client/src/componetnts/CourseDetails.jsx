@@ -73,12 +73,12 @@ const CourseDetails = (props) => {
                     {thisCourse.description}
                   </Typography>
                 </CardContent>
-                <CardActions>
+                
                   {props.loggedInUser._id != thisCourse.instructor ? <Button size="small" onClick={userToCourse}>Register this course</Button> : listOfStudents2.map((student,index)=>
-                  {return(<ol><li key={index}>{student.firstName} {student.lastName}</li></ol>
-                  )})}
+                  <li key={index}>{student.firstName} {student.lastName}</li>
+                  )}
                   <Button size="small" onClick={() => history.push("/success")}>Back</Button>
-                </CardActions>
+             
               </Card>
             </Grid>
           </Grid>
