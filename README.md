@@ -26,5 +26,16 @@ through courses  provided by  experienced application users for a specified peri
 5. socket.io:
   * every course has chat room.
   
-  
-![This is an image](https://myoctocat.com/assets/images/base-octocat.svg)
+## Wire Frame
+
+* Home Page
+
+![This is an image](https://github.com/MajedAmria/MERN-Project/blob/master/photo/1.png)
+
+* Login and Registration Page
+
+![This is an image](https://github.com/MajedAmria/MERN-Project/blob/master/photo/login.png)
+
+* Socket.io
+
+![This is an image](https://github.com/MajedAmria/MERN-Project/blob/master/photo/socket.png)
