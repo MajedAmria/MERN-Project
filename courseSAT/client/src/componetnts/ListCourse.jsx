@@ -9,16 +9,24 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { useHistory } from 'react-router-dom';
 import axios from 'axios';
-
+import io from "socket.io-client";
+const socket = io.connect("http://localhost:3001");
 const ListCourse = (props) => {
   const history =useHistory();
   const [courses, setCourses]=useState([]);
 
   useEffect(()=>{
-    axios.get('http://localhost:8000/api/courses')
+    axios.get('/api/courses')
     .then(res=>{setCourses(res.data)})
   },[])
 
+
+
+  const handleViewClick = (course, index) => {
+  
+  history.push(`/course/${course._id}`);
+  
+}
   return (
     <div >
       <div className='all'>
@@ -54,7 +62,7 @@ const ListCourse = (props) => {
                   </CardContent>
                   {props.loggedInUser==null?'':
                   <CardActions>
-                    <Button size="small" onClick={()=>history.push(`/course/${course._id}`)}>View</Button>
+                    <Button size="small" onClick={()=>handleViewClick(course, index)}>View</Button>
                   </CardActions>}
                 </Card>
               </Grid>

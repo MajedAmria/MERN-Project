@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import { Button, Card ,CardBody,Form,Label,Input} from 'reactstrap'
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
@@ -12,16 +12,25 @@ const Registration = (props) => {
   const [phoneNumber, setPhoneNumber] = useState(0);
   const [errors,setErrors] = useState([])
   const history=useHistory();
+  const [canNavigate, setCanNavigate] = useState(false)
 
+  useEffect(()=>{if(canNavigate){
+    history.push("/success");
+  }}, [canNavigate])
   const onRegistration=async(e)=>{
     e.preventDefault();
     // await axios.post('http://localhost:8000/api/register', {firstName: firstName, lastName: lastName,
     // email: email, password: password, confirmPassword: confirmPassword, phoneNumber: phoneNumber})
     try{
-    props.updateLoggedInUser(await axios.post('http://localhost:8000/api/register', {firstName: firstName, lastName: lastName,
-    email: email, password: password, confirmPassword: confirmPassword, phoneNumber: phoneNumber}))
-    history.push("/success");
+      const {data} = await axios.post('/api/register', {firstName: firstName, lastName: lastName,
+      email: email, password: password, confirmPassword: confirmPassword, phoneNumber: phoneNumber})
+    props.updateLoggedInUser(data.user)
+    setCanNavigate(true)
+    // history.push("/success");
+   
   }
+
+ 
   catch(err){
     const errorResponse = err.response.data.errors; // Get the errors from err.response.data
     const errorArr = []; // Define a temp error array to push the messages in

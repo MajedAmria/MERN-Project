@@ -11,6 +11,7 @@ import Dashbord from './views/Dashbord';
 import NewCourse from './views/NewCourse';
 import View from './views/View';
 import { useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 function App() {
 
   const [loggedInUser, setLoggedInUser] = useState({})
@@ -20,6 +21,7 @@ function App() {
     setLoggedInUser(user) 
   }
 
+
     useEffect(()=>{
       console.log(loggedInUser)
       if(Object.keys(loggedInUser).length == 0){
@@ -27,6 +29,7 @@ function App() {
       }else{
         setIsLoggedIn(true)
       }
+
     }, [loggedInUser])
 
     let page;
@@ -47,7 +50,7 @@ function App() {
           <NewCourse loggedInUser={loggedInUser}/>
         </Route>
         <Route  path='/course/:id'>
-          <View updateLoggedInUser={updateLoggedInUser} loggedInUser={loggedInUser}/>
+          <View updateLoggedInUser={updateLoggedInUser} loggedInUser={loggedInUser} />
         </Route>
       </Switch>
       )
@@ -65,7 +68,7 @@ function App() {
     }
   return (
     
-    <BrowserRouter>
+    <BrowserRouter >
     <div className="App">
     {page}
     </div>

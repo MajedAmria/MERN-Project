@@ -15,20 +15,22 @@ module.exports.register=(req, response) => {
                     httpOnly: true})
                 .json({ msg: "success!", user: {_id:user._id, firstName: user.firstName, lastName: user.lastName}});
         })
-        .catch(err => response.json(err));
+        .catch(err => response.status(400).json(err));
     }
 
 module.exports.login=async(request, response)=>{
     const user = await User.findOne({ email: request.body.email });
     if(user === null) {
         console.log("user not found");
-        return(err=> response.sendStatus(400).json(err));
+        response.status(400).json({errors:'user not found'});
+        return
     }
     const correctPassword = await bcrypt.compare(request.body.password, user.password);
 
     if(!correctPassword) {
         console.log("incorrect password");
-        return response.sendStatus(400);
+    response.status(400).json({errors:'incorrect password'});
+    return
     }
     const payload = {
         id: user._id
@@ -83,6 +85,24 @@ module.exports.addStudentToCourse=async(request, response)=>{
     response.json({thisCourse});
 }
 
+// module.exports.getStudentsInCourse=async(request,response)=>{
+//     const thisCourse= request.params.courseId;
+//     const listOfUsers=await  User.find({listOfCoursesTaken:{$in:[thisCourse]}});
+//     response.json({listOfUsers})
+   
+
+// }
+
+module.exports.getStudentsInCourse = async(request, response)=> {
+    try {
+      // get the firstName, and lastName fields of each member in conversation
+      const result = await Course.find({_id: request.params.courseId}).populate('listOfStudents', 'firstName lastName')
+      response.json(result)
+    } catch (e) {
+        response.json(e)
+    }
+  }
+  
 module.exports.logout= (req, res) => {
     res.clearCookie('usertoken');
     res.sendStatus(200);

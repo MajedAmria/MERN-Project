@@ -17,8 +17,9 @@ const CourseForm = (props) => {
   const onCreateCourse=async(e)=>{
     e.preventDefault ();
     try{
-    await axios.post('http://localhost:8000/api/course', {title: title, startingDate: startingDate,
+    await axios.post('/api/course', {title: title, startingDate: startingDate,
     endDate: endDate, description: description, coursePrice: coursePrice,instructor:props.loggedInUser, imageUrl: imageUrl})
+    console.log(props.loggedInUser)
     history.replace("/success");
   }
     catch(err){

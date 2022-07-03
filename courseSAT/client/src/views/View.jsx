@@ -9,8 +9,10 @@ const View = (props) => {
     <div >
       <DashNav updateLoggedInUser={props.updateLoggedInUser} loggedInUser={props.loggedInUser}/>
       <CourseDetails loggedInUser={props.loggedInUser}/>
+
     </div>
   )
+  
 }
 
-export default View
+export default View 

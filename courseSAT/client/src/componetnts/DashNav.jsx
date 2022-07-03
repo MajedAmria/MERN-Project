@@ -1,17 +1,16 @@
 import React from 'react'
 import  Avatar  from '@mui/material/Avatar'
-import { Navbar,NavbarToggler,NavbarBrand,Collapse,Nav,NavItem,NavLink,UncontrolledDropdown} from 'reactstrap'
+import { Navbar,NavbarToggler,NavbarBrand,Collapse,Nav,NavItem,NavLink} from 'reactstrap'
 import { deepOrange } from '@mui/material/colors';
 import axios from 'axios';
 import { useHistory, Link } from 'react-router-dom';
-import MainNav from './MainNav';
+// import MainNav from './MainNav';
 
 const DashNav = (props) => {
 
   const history=useHistory();
-
   const onLogOut=()=>{
-    axios.get('http://localhost:8000/api/logout')
+    axios.get('/api/logout')
     .then(props.updateLoggedInUser({}))
     .then(history.push('/'))
     .catch(err=>console.error(err));
@@ -19,12 +18,13 @@ const DashNav = (props) => {
   return (
     <div>
         <Navbar color="dark" dark expand="md" light>
-          <NavbarBrand to="/">Home Page</NavbarBrand>
+          
             <NavbarToggler onClick={function noRefCheck(){}} />
+            <NavbarBrand href="/">Home Page</NavbarBrand>
             <Collapse navbar>
               <Nav className="me-auto" navbar>
                 <NavItem>
-                  <NavLink to="/about">About Us</NavLink>
+                  <NavLink href="/about">About Us</NavLink>
                 </NavItem>
                 <NavItem>
                   <Link to="/new">New Course</Link>
