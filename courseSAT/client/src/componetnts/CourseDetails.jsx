@@ -19,19 +19,20 @@ const CourseDetails = (props) => {
   const {id}=useParams();
   const history =useHistory();
   
+ 
+  useEffect(()=>{
+    axios.get(`/api/courses/${id}`)
+    .then(response=>{setThisCourse(response.data);console.log(thisCourse.title)})
+    .then(joinRoom)
+    .catch(err=>console.error(err))
+  },[id]);
+
   const joinRoom = () => {
     if (props.loggedInUser.firstName !== "" && thisCourse.title!=="" ) {
       socket.emit("join_room", thisCourse.title);
       
     }
   };
-  useEffect(()=>{
-    axios.get(`/api/courses/${id}`)
-    .then(response=>{setThisCourse(response.data);console.log(response.data)})
-    .then(joinRoom)
-    .catch(err=>console.error(err))
-  },[id]);
-
   const userToCourse =(e)=>{
     axios.put(`/api/${id}/${props.loggedInUser._id}`,thisCourse)
     .then(res=>setThisCourse(res.data))
